@@ -20,6 +20,16 @@ def _sum(itrble: Iterable) -> Union[int, float]:
     return n
 
 
+def _sqrt(x: Union[int, float], precision: int = 10) -> float:
+    '''
+    This is a simple implementation of the Babylonian method
+    '''
+    n = 1
+    for _ in range(precision):
+        print(n)
+        n = (n + x/n) * 0.5
+
+
 def geometric_mean(x_array: Iterable) -> float:
     '''
     Used to find the average of %, ratios, indexes or
@@ -45,6 +55,35 @@ def weighted_mean(x_array: Iterable) -> float:
     '''
     v_w = {x: x_array.count(x) for x in set(x_array)}
     return _sum([x*y for x, y in v_w.items()])/_sum(v_w.values())
+
+
+def statistical_range(x_array: Iterable) -> Union[int, float]:
+    '''
+    The range between the largest and smallest value in
+    the sample of values
+    '''
+    return max(x_array) - min(x_array)
+
+
+def mean_absolute_deviation(x_array: Iterable) -> float:
+    '''
+    The sum of the absolute of each  value in the sample minus the mean
+    of the sample.
+    '''
+    m = sample_mean(x_array)
+    return _sum([abs(x-m) for x in x_array]) / len(x_array)
+
+
+def variance(x_array: Iterable) -> float:
+    '''
+    The arithmetic mean of the squared deviations of the mean
+    '''
+    m = sample_mean(x_array)
+    return _sum([(x-m)**2 for x in x_array])/len(x_array)
+
+
+def standard_deviation(x_array: Iterable) -> float:
+    return _sqrt(variance(x_array))
 
 
 if __name__ == '__main__':
