@@ -25,9 +25,11 @@ def _sqrt(x: Union[int, float], precision: int = 10) -> float:
     This is a simple implementation of the Babylonian method
     '''
     n = 1
+    y = x
     for _ in range(precision):
-        print(n)
-        n = (n + x/n) * 0.5
+        y = (y + n) / 2
+        n = x / y
+    return y
 
 
 def geometric_mean(x_array: Iterable) -> float:
@@ -84,14 +86,3 @@ def variance(x_array: Iterable) -> float:
 
 def standard_deviation(x_array: Iterable) -> float:
     return _sqrt(variance(x_array))
-
-
-if __name__ == '__main__':
-    l_of_percents = [24, 13, 50, 75, 10]
-    l_of_values = [100, 98, 50, 75, 38, 28, 70, 12, 100]
-    l_of_prices = [0.50, 0.50, 0.50, 0.75, 0.75,
-                   0.75, 0.75, 0.90, 0.90, 0.90]
-
-    print(geometric_mean(l_of_percents))
-    print(sample_mean(l_of_values))
-    print(weighted_mean(l_of_prices))
