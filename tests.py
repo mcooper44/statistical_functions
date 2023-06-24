@@ -51,7 +51,16 @@ class Test_mean(unittest.TestCase):
     '''
     test sample population and weighted mean
     '''
-    pass
+    def test_sample_mean_list_int(self):
+        self.assertEqual(central.sample_mean([1, 3, 9, 81]), 23.5)
+
+    def test_population_mean_list_int(self):
+        self.assertEqual(central.population_mean([1, 3, 9, 81]), 23.5)
+
+    def test_weighted_mean_list_int(self):
+        x = 15.28571429
+        self.assertEqual(round(
+            central.weighted_mean([1, 1, 3, 3, 9, 9, 81]), 8), x)
 
 
 class Test_statistical_range(unittest.TestCase):
