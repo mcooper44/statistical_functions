@@ -1,5 +1,6 @@
 import unittest
 from py_funcs import central
+import statistics as stats
 
 
 class Test_product(unittest.TestCase):
@@ -64,19 +65,28 @@ class Test_mean(unittest.TestCase):
 
 
 class Test_statistical_range(unittest.TestCase):
-    pass
+    def test_srange_list(self):
+        self.assertEqual(central.statistical_range([10, 20]), 10)
 
 
 class Test_MAD(unittest.TestCase):
-    pass
+    def test_MAD_list(self):
+        data = data = [75, 69, 56, 46, 47, 79, 92, 97, 89, 88,
+                       36, 96, 105, 32, 116, 101, 79, 93, 91, 112]
+        x = 20.055000000000003
+        self.assertEqual(central.mean_absolute_deviation(data), x)
 
 
 class Test_variance(unittest.TestCase):
-    pass
+    def test_variance_list(self):
+        data = [10, 20, 40, 80, 160, 320]
+        self.assertEqual(central.variance(data), stats.variance(data))
 
 
 class Test_standard_deviation(unittest.TestCase):
-    pass
+    def test_stdev_list(self):
+        data = [75, 69, 56, 46, 47, 79, 92, 97, 89, 88]
+        self.assertEqual(central.standard_deviation(data), stats.stdev(data))
 
 
 if __name__ == '__main__':
