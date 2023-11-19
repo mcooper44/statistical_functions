@@ -20,16 +20,27 @@ def _sum(itrble: Iterable) -> Union[int, float]:
     return n
 
 
-def _sqrt(x: Union[int, float], precision: int = 0) -> float:
+def _sqrt(S: Union[int, float], precision: int = 11) -> float:
     '''
+
     This is a simple implementation of the Babylonian method
+    to find the sqrt of S pick a number x_0 that you think
+    might be correct. And apply x_1 = (x_0 + S / x_0)/2
+    and iterate until x_n+1 and x_n agree to as many decimal
+    points as you desire
     '''
-    n = 1
-    y = x
+    if int(S) == 0:
+        return 0.0
+    if S < 0:
+        raise ValueError('negative input not in domain of possible squares')
+    x = S/2  # start with a guess
+    x_n = 0
     for _ in range(precision):
-        y = (y + n) / 2
-        n = x / y
-    return y
+        x = (x + (S/x))/2
+        if x_n == x:  # we have convergence
+            return x
+        x_n = x
+    return x_n  # iterated precision times w/o convergence
 
 
 def geometric_mean(x_array: Iterable) -> float:
