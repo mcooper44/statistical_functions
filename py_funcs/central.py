@@ -20,7 +20,7 @@ def _sum(itrble: Iterable) -> Union[int, float]:
     return n
 
 
-def _sqrt(x: Union[int, float], precision: int = 10) -> float:
+def _sqrt(x: Union[int, float], precision: int = 0) -> float:
     '''
     This is a simple implementation of the Babylonian method
     '''
@@ -78,10 +78,11 @@ def mean_absolute_deviation(x_array: Iterable) -> float:
 
 def variance(x_array: Iterable) -> float:
     '''
-    The arithmetic mean of the squared deviations of the mean
+    The arithmetic mean of the squared deviations of the mean.
+    This yields the sample variance.
     '''
     m = sample_mean(x_array)
-    return _sum([(x-m)**2 for x in x_array])/len(x_array)
+    return _sum([(x-m)**2 for x in x_array])/(len(x_array)-1)
 
 
 def standard_deviation(x_array: Iterable) -> float:
