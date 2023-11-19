@@ -97,4 +97,14 @@ def variance(x_array: Iterable) -> float:
 
 
 def standard_deviation(x_array: Iterable) -> float:
+    '''
+    returns the sample standard deviation of an array
+    '''
     return _sqrt(variance(x_array))
+
+
+def standard_error_mean(x_array: Iterable) -> float:
+    '''
+    returns the sample standard error of the mean
+    '''
+    return standard_deviation(x_array) / _sqrt(len(x_array))
