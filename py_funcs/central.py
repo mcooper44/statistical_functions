@@ -4,7 +4,9 @@ functions to measure central tendancy
 '''
 from collections.abc import Iterable
 from typing import Union
-from s_math import _product, _sum, _sqrt
+from s_math import _product
+from s_math import _sum
+from s_math import _sqrt
 
 
 def geometric_mean(x_array: Iterable) -> float:
