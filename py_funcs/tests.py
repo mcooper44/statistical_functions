@@ -1,8 +1,13 @@
 import unittest
 import central
 import s_math
-# from py_funcs import digital
+import digital
 import statistics as stats
+
+
+class Test_int_to_bin(unittest.TestCase):
+    def test_simple_bin(self):
+        self.assertTrue(bin(2).__eq__(digital.int_to_bin(2)))
 
 
 class Test_product(unittest.TestCase):
