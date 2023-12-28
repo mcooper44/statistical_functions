@@ -1,6 +1,6 @@
 import unittest
-from py_funcs import central
-from py_funcs import s_math
+import central
+import s_math
 # from py_funcs import digital
 import statistics as stats
 
