@@ -1,45 +1,54 @@
 import unittest
 from py_funcs import central
+from py_funcs import s_math
+# from py_funcs import digital
 import statistics as stats
 
 
 class Test_product(unittest.TestCase):
     def test_list_int(self):
         idata = [1, 2, 3]
-        result = central._product(idata)
+        result = s_math._product(idata)
         self.assertEqual(result, 6)
 
     def test_list_float(self):
         fdata = [2.5, 3.75, 6.0]
-        self.assertEqual(central._product(fdata), 56.25)
+        self.assertEqual(s_math._product(fdata), 56.25)
 
     def test_bad_str(self):
         with self.assertRaises(TypeError):
-            central._product('Hello Friend')
+            s_math._product('Hello Friend')
 
 
 class Test_sum(unittest.TestCase):
     def test_list_int(self):
         data = [1, 2, 3]
-        self.assertEqual(central._sum(data), 6)
+        self.assertEqual(s_math._sum(data), 6)
 
     def test_list_float(self):
-        self.assertEqual(central._sum([1.0, 2.0, 3.0]), 6.0)
+        self.assertEqual(s_math._sum([1.0, 2.0, 3.0]), 6.0)
 
     def test_bad_str(self):
         with self.assertRaises(TypeError):
-            central._sum('Hello Friend')
+            s_math._sum('Hello Friend')
 
 
 class Test_sqrt(unittest.TestCase):
     def test_int(self):
-        self.assertEqual(central._sqrt(100), 10.0)
+        self.assertEqual(s_math._sqrt(100), 10.0)
 
     def test_float(self):
-        self.assertEqual(central._sqrt(100.0), 10.0)
+        self.assertEqual(s_math._sqrt(100.0), 10.0)
 
     def test_float_complex(self):
-        self.assertEqual(central._sqrt(5.2), 2.280350850198276)
+        self.assertEqual(s_math._sqrt(5.2), 2.280350850198276)
+
+    def test_zero_value(self):
+        self.assertEqual(s_math._sqrt(0), 0.0)
+
+    def test_negative_value(self):
+        with self.assertRaises(ValueError):
+            s_math._sqrt(-1)
 
 
 class Test_geometric_mean(unittest.TestCase):
