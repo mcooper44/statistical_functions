@@ -5,6 +5,13 @@ import digital
 import statistics as stats
 
 
+class Test_bin_int(unittest.TestCase):
+
+    def test_simple_int(self):
+        bin_str = '110101'
+        self.assertTrue(int(bin_str, 2).__eq__(digital.bin_to_int(bin_str)))
+
+
 class Test_int_to_bin(unittest.TestCase):
     def test_simple_bin(self):
         self.assertTrue(bin(2).__eq__(digital.int_to_bin(2)))
