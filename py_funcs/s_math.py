@@ -44,3 +44,17 @@ def _sqrt(S: Union[int, float], precision: int = 11) -> float:
             return x
         x_n = x
     return x_n  # iterated precision times w/o convergence
+
+def pad_to_base(n: int, base: int = 4) -> int:
+    '''
+    Provides integer value needed to pad a string
+    so that it is of a specified length.
+    This function is needed to determine how many 0's 
+    need to be pre-pended to a binary string so that
+    it is a multiple of 4 bits long.
+    '''
+    padding = 0
+    while (n + padding) % base !=0:
+        padding += 1
+    return padding
+
