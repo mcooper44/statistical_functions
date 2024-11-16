@@ -34,6 +34,6 @@ def int_to_hex(n: int, flag: bool = False) -> str:
     bin_val = int_to_bin(n)
     pad = pad_to_base(len(bin_val), 4)
     bin_str = f'{'0'*pad}{bin_val}'
-    bin_seg = [bin_str[i:i+4] for i in range(0, len(bin_str), 4)] # this is wrong
+    bin_seg = [bin_str[i:i+4] for i in range(0, len(bin_str), 4)] 
     hex_val = ''.join(lu.get(s, '') for s in bin_seg)
     return f'0x{hex_val}' if flag else hex_val
