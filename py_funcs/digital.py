@@ -46,3 +46,6 @@ def int_to_hex(n: int, flag: bool = False) -> str:
     bin_seg = [bin_str[i:i+4] for i in range(0, len(bin_str), 4)]
     hex_val = ''.join(B2H_LU.get(s, '') for s in bin_seg)
     return f'0x{hex_val}' if flag else hex_val
+
+def hex_to_bin(h: str) -> str:
+    return ''.join(H2B_LU.get(char, '') for char in h)
