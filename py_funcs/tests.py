@@ -5,6 +5,15 @@ import digital
 import statistics as stats
 
 
+class Test_int_to_hex(unittest.TestCase):
+
+    def test_ints(self):
+        test_rack = [(1,'1'),(5, '5'), (10,'A'), (15, 'F'),
+                     (300, '12C'), (500, '1F4'), (1000000,'F4240')]
+        for n, s in test_rack:
+            self.assertTrue(digital.int_to_hex(n).__eq__(s))
+
+
 class Test_bin_int(unittest.TestCase):
 
     def test_simple_int(self):
@@ -14,7 +23,7 @@ class Test_bin_int(unittest.TestCase):
 
 class Test_int_to_bin(unittest.TestCase):
     def test_simple_bin(self):
-        self.assertTrue(bin(2).__eq__(digital.int_to_bin(2)))
+        self.assertTrue(bin(2).__eq__(digital.int_to_bin(2, True)))
 
 
 class Test_product(unittest.TestCase):
