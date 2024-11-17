@@ -55,15 +55,18 @@ def int_to_hex(n: int, flag: bool = False) -> str:
     return f'0x{hex_val}' if flag else hex_val
 
 
-def bin_to_hex(b: str) -> str:
-    return int_to_hex(bin_to_int(b))
+def bin_to_hex(b: str, flag: bool = False) -> str:
+    if flag: b = b[2:]
+    return int_to_hex(bin_to_int(b), flag)
 
 
-def hex_to_bin(h: str) -> str:
+def hex_to_bin(h: str, flag: bool = False) -> str:
+    if flag: h = h[2:]
     return ''.join(H2B_LU.get(char, '') for char in h)
 
 
-def hex_to_int(h: str) -> int:
+def hex_to_int(h: str, flag: bool = False) -> int:
+    if flag: h = h[2:]
     multiplier = [int(HEX_VALUES.index(v)) for v in h[::-1]]
     return _sum(m*(16**p) for m,p in zip(multiplier, range(0, len(h))))
 
