@@ -62,12 +62,13 @@ def bin_to_hex(b: str, flag: bool = False) -> str:
 
 def hex_to_bin(h: str, flag: bool = False) -> str:
     if flag: h = h[2:]
-    return ''.join(H2B_LU.get(char, '') for char in h)
-
+    bin_str = ''.join(H2B_LU.get(char.upper(), '') for char in h)
+    one_index = bin_str[bin_str.index('1'):]
+    return f'0b{one_index}' if flag else bin_str
 
 def hex_to_int(h: str, flag: bool = False) -> int:
     if flag: h = h[2:]
-    multiplier = [int(HEX_VALUES.index(v)) for v in h[::-1]]
+    multiplier = [int(HEX_VALUES.index(v.upper())) for v in h[::-1]]
     return _sum(m*(16**p) for m,p in zip(multiplier, range(0, len(h))))
 
 
