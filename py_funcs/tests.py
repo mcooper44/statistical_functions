@@ -1,8 +1,19 @@
 import unittest
+import random
 import central
 import s_math
 import digital
 import statistics as stats
+
+
+
+class Test_bin_to_hex(unittest.TestCase):
+
+    def test_random_bin(self):
+        test_set = [bin(random.randint(0, 1000)) for _ in range(0,10)]
+        for t in test_set:
+            h_value = f'0x{int(t[2:],2):X}'
+            self.assertTrue(h_value.__eq__(digital.bin_to_hex(t, True)))
 
 
 class Test_int_to_hex(unittest.TestCase):
