@@ -63,7 +63,7 @@ def bin_to_hex(b: str, flag: bool = False) -> str:
 def hex_to_bin(h: str, flag: bool = False) -> str:
     if flag: h = h[2:]
     bin_str = ''.join(H2B_LU.get(char.upper(), '') for char in h)
-    one_index = bin_str[bin_str.index('1'):]
+    one_index = bin_str[bin_str.index('1'):] # strip leading 0's
     return f'0b{one_index}' if flag else bin_str
 
 def hex_to_int(h: str, flag: bool = False) -> int:
@@ -72,3 +72,21 @@ def hex_to_int(h: str, flag: bool = False) -> int:
     return _sum(m*(16**p) for m,p in zip(multiplier, range(0, len(h))))
 
 
+def add_binary(b1: str, b2: str) -> str:
+    carry_bit = 0
+    digits = list(zip(b1[::-1], b2[::-1]))
+    carry_bit = 0
+    bits = []
+    for d1, d2 in digits:
+        s = _sum([int(d1), int(d2), carry_bit])
+        if s == 0:
+            bits.append('0')
+        if s == 1:
+            bits.append('1')
+            carry_bit = 0
+        if s == 2:
+            bits.append('0')
+            carry_bit = 1
+        if s == 3:
+            bits.append('1')
+    return ''.join(bits)
