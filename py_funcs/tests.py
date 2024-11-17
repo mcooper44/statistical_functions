@@ -6,6 +6,14 @@ import digital
 import statistics as stats
 
 
+class Test_hex_to_bin(unittest.TestCase):
+
+    def test_random_hex(self):
+        test_set = [f'0x{random.randint(0,1000):X}' for _ in range(0, 10)]
+        for t in test_set:
+            b_value = bin(int(t,16))
+            self.assertTrue(b_value.__eq__(digital.hex_to_bin(t, True)))
+
 
 class Test_bin_to_hex(unittest.TestCase):
 
