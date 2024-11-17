@@ -35,9 +35,10 @@ def int_to_bin(n: int, flag: bool = False) -> str:
     return f'0b{b_str}' if flag else b_str
 
 
-def bin_to_int(n: str) -> int:
+def bin_to_int(n: str, flag: bool = False) -> int:
     v = 0
     i = 0
+    if flag: n = n[2:]
     for _ in range(len(n)):
         _i = int(n[::-1][i])
         v += ((2**i)*_i)
@@ -54,12 +55,12 @@ def int_to_hex(n: int, flag: bool = False) -> str:
     return f'0x{hex_val}' if flag else hex_val
 
 
-def hex_to_bin(h: str) -> str:
-    return ''.join(H2B_LU.get(char, '') for char in h)
-
-
 def bin_to_hex(b: str) -> str:
     return int_to_hex(bin_to_int(b))
+
+
+def hex_to_bin(h: str) -> str:
+    return ''.join(H2B_LU.get(char, '') for char in h)
 
 
 def hex_to_int(h: str) -> int:
