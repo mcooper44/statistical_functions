@@ -58,3 +58,8 @@ def pad_to_base(n: int, base: int = 4) -> int:
         padding += 1
     return padding
 
+def pad_to_n(b: str, n: int) -> list:
+    '''
+    Prepends n 0's to a binary string
+    '''
+    return f'{'0'*n}{b}'
