@@ -6,6 +6,24 @@ import digital
 import statistics as stats
 
 
+class Test_add_binary(unittest.TestCase):
+
+    test_pairs = [[random.randint(0, 600),
+                   random.randint(50, 1000)] for _ in range(0,9)]
+
+    def test_random_bin_a_b(self):
+
+        for a, b in self.test_pairs:
+            s = bin(a + b)[2:]
+            b1, b2 = bin(a), bin(b)
+            self.assertTrue(s.__eq__(digital.add_binary(b1[2:], b2[2:])))
+
+    def test_with_flag(self):
+        for a, b in self.test_pairs:
+            s = bin(a + b)
+            self.assertEqual(s, digital.add_binary(bin(a), bin(b), True))
+
+
 class Test_hex_to_bin(unittest.TestCase):
 
     def test_random_hex(self):
