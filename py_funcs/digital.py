@@ -3,6 +3,7 @@ Functions for working with binary and hex data
 '''
 from s_math import _divmod
 from s_math import pad_to_base
+from s_math import pad_to_n
 from s_math import _sum
 
 # Binary to Hex lookup
@@ -49,7 +50,7 @@ def bin_to_int(n: str, flag: bool = False) -> int:
 def int_to_hex(n: int, flag: bool = False) -> str:
     bin_val = int_to_bin(n)
     pad = pad_to_base(len(bin_val), 4)
-    bin_str = f'{'0'*pad}{bin_val}'
+    bin_str = pad_to_n(bin_val, pad)
     bin_seg = [bin_str[i:i+4] for i in range(0, len(bin_str), 4)]
     hex_val = ''.join(B2H_LU.get(s, '') for s in bin_seg)
     return f'0x{hex_val}' if flag else hex_val
@@ -66,17 +67,23 @@ def hex_to_bin(h: str, flag: bool = False) -> str:
     one_index = bin_str[bin_str.index('1'):] # strip leading 0's
     return f'0b{one_index}' if flag else bin_str
 
+
 def hex_to_int(h: str, flag: bool = False) -> int:
     if flag: h = h[2:]
     multiplier = [int(HEX_VALUES.index(v.upper())) for v in h[::-1]]
     return _sum(m*(16**p) for m,p in zip(multiplier, range(0, len(h))))
 
 
-def add_binary(b1: str, b2: str) -> str:
-    carry_bit = 0
-    digits = list(zip(b1[::-1], b2[::-1]))
-    carry_bit = 0
+def add_binary(b1: str, b2: str, flag: bool = False) -> str:
     bits = []
+    carry_bit = 0
+    if flag:
+        b1 = b1[2:]
+        b2 = b2[2:]
+    m = max(len(b1), len(b2))
+    b1 = pad_to_n(b1, (m - len(b1)))
+    b2 = pad_to_n(b2, (m - len(b2)))
+    digits = list(zip(b1[::-1], b2[::-1]))
     for d1, d2 in digits:
         s = _sum([int(d1), int(d2), carry_bit])
         if s == 0:
@@ -89,4 +96,7 @@ def add_binary(b1: str, b2: str) -> str:
             carry_bit = 1
         if s == 3:
             bits.append('1')
-    return ''.join(bits)
+    if carry_bit:
+        bits.append('1')
+    bin_str = ''.join(bits)[::-1]
+    return f'0b{bin_str}' if flag else bin_str
