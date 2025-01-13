@@ -27,6 +27,12 @@ HEX_VALUES = ['0', '1', '2', '3', '4', '5', '6', '7', '8',
 
 
 def int_to_bin(n: int, flag: bool = False) -> str:
+    '''
+    simple int to binary converation
+    n is input integer
+    flag is to prepend 0b to output string
+    returns string
+    '''
     x = n
     b_str = ''
     while x > 0:
@@ -37,6 +43,12 @@ def int_to_bin(n: int, flag: bool = False) -> str:
 
 
 def bin_to_int(n: str, flag: bool = False) -> int:
+    '''
+    simple binary string to integer conversion
+    n is input binary digits as str
+    flag is to parse out digits from 0b signifier
+    returns int value
+    '''
     v = 0
     i = 0
     if flag: n = n[2:]
@@ -48,6 +60,12 @@ def bin_to_int(n: str, flag: bool = False) -> int:
 
 
 def int_to_hex(n: int, flag: bool = False) -> str:
+    '''
+    converts integer value to hex
+    n is input int value
+    flag is to prepend 0x hex signifier
+    return is str hex representation of input int
+    '''
     bin_val = int_to_bin(n)
     pad = pad_to_base(len(bin_val), 4)
     bin_str = pad_to_n(bin_val, pad)
@@ -57,11 +75,23 @@ def int_to_hex(n: int, flag: bool = False) -> str:
 
 
 def bin_to_hex(b: str, flag: bool = False) -> str:
+    '''
+    converts binary str to hex value via helper funcs
+    b is input binary str
+    flag identifies if 0b signifier is present
+    returns hex representation as str
+    '''
     if flag: b = b[2:]
     return int_to_hex(bin_to_int(b), flag)
 
 
 def hex_to_bin(h: str, flag: bool = False) -> str:
+    '''
+    converts hex str to binary str via helper funcs
+    h is input hex str
+    flag identifies if 0x signifier is present
+    returns binary representation of hex input as str
+    '''
     if flag: h = h[2:]
     bin_str = ''.join(H2B_LU.get(char.upper(), '') for char in h)
     one_index = bin_str[bin_str.index('1'):] # strip leading 0's
@@ -69,19 +99,32 @@ def hex_to_bin(h: str, flag: bool = False) -> str:
 
 
 def hex_to_int(h: str, flag: bool = False) -> int:
+    '''
+    converts hex str to integer
+    h is input hex str
+    flag idenfies if 0x signifier is present
+    returns int value
+    '''
     if flag: h = h[2:]
     multiplier = [int(HEX_VALUES.index(v.upper())) for v in h[::-1]]
     return _sum(m*(16**p) for m,p in zip(multiplier, range(0, len(h))))
 
 
 def add_binary(b1: str, b2: str, flag: bool = False) -> str:
+    '''
+    adds two binary str representations and returns binary
+    str value
+    b1, b2 are input binary str
+    flag idenfies if input str has 0b signifier present
+    returns str
+    '''
     bits = []
     carry_bit = 0
     if flag:
         b1 = b1[2:]
         b2 = b2[2:]
     m = max(len(b1), len(b2))
-    b1 = pad_to_n(b1, (m - len(b1)))
+    b1 = pad_to_n(b1, (m - len(b1))) # ensure = length
     b2 = pad_to_n(b2, (m - len(b2)))
     digits = list(zip(b1[::-1], b2[::-1]))
     for d1, d2 in digits:
