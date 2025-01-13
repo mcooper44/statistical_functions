@@ -45,6 +45,20 @@ def _sqrt(S: Union[int, float], precision: int = 11) -> float:
         x_n = x
     return x_n  # iterated precision times w/o convergence
 
+
+def _fact(n: int) -> int:
+    '''
+    iterative method for finding factorials
+    '''
+    if n < 0:
+        raise ValueError('negative input is not valid')
+    if n == 0:
+        return 1
+    v = 1
+    for i in range(2, n + 1):
+        v = v * i
+    return v
+
 def pad_to_base(n: int, base: int = 4) -> int:
     '''
     Provides integer value needed to pad a string
